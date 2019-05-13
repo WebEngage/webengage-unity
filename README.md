@@ -1,6 +1,6 @@
 # WebEngage Unity
 
-WebEngage Unity plugin is only for Android and iOS apps built with Unity, this will not work on any other platform.
+WebEngage Unity plugin is for Android and iOS apps built with Unity. This unity-package will not work on any other platform.
 
 
 ## Installation
@@ -42,7 +42,8 @@ If `AndroidManifest.xml` file does not exist in `Assets/Plugins/Android/` direct
 
     <application
         android:label="@string/app_name"
-        android:icon="@drawable/app_icon">
+        android:icon="@drawable/app_icon"
+        android:allowBackup="false">
 
         <meta-data android:name="com.webengage.sdk.android.key" android:value="YOUR-WEBENGAGE-LICENSE-CODE" />
 
@@ -266,6 +267,7 @@ using WebEngageBridge;
     customAttributes.Add("Subscribed", true);
     WebEngage.SetUserAttributes(customAttributes);
 ```
+**Note:** WebEngage SDK only supports the following data-types: string, bool, int, long, float, double, DateTime, List and Dictionary.
 
 4. Delete custom user attributes as shown below.
 
@@ -342,6 +344,8 @@ using WebEngageBridge;
 
     WebEngage.TrackEvent("Order Placed", orderPlacedAttributes);
 ```
+
+**Note:** WebEngage SDK only supports the following data-types: string, bool, int, long, float, double, DateTime, List and Dictionary.
 
 
 ## Push Notifications for Android
@@ -441,26 +445,31 @@ using WebEngageBridge;
 
 ### Rich Push Notifications
 
+ 1. Enable Push Notifications, App Groups and add the app group `group.<your-bundle-identifier>.WEGNotificationGroup` to your App ID from your Apple Developer Account. Download and install the updated provisioning profile of your app in your Xcode.
+
 #### 1. Banner Push Notifications
 
- 1. Download the [WebEngageNotificationService.unitypackage](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngageNotificationService.unitypackage).
+ 1. Add a new App Bundle ID `<your-bundle-identifier>.NotificationService`, enable Push Notifications, App Groups and add the group `group.<your-bundle-identifier>.WEGNotificationGroup` in this newly created App ID from your Apple Developer Account. Download and install the provisioning profile of this App ID in your Xcode.
 
- 2. Import the downloaded unitypackage into your Unity project through `Assets` > `Import Package` > `Custom Package...`.
+ 2. Download the [WebEngageNotificationService.unitypackage](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngageNotificationService.unitypackage).
 
- 3. Build your iOS app through Unity Editor and open Unity-iPhone.xcodeproj in your Xcode IDE.
+ 3. Import the downloaded unitypackage into your Unity project through `Assets` > `Import Package` > `Custom Package...`.
 
- 4. Verify that NotificationService extension is added and linked to your main app target.
+ 4. Build your iOS app through Unity Editor and open Unity-iPhone.xcodeproj in your Xcode IDE.
 
+ 5. Verify that NotificationService extension is added and linked to your main app target.
 
 #### 2. Rating and Carousel Push Notifications
 
- 1. Download the [WebEngageNotificationContent.unitypackage](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngageNotificationContent.unitypackage).
+ 1. Add the App Bundle ID `<your-bundle-identifier>.NotificationViewController`, enable Push Notifications, App Groups and add the group `group.<your-bundle-identifier>.WEGNotificationGroup` in this newly created App ID from your Apple Developer Account. Download and install the provisioning profile of this App ID in your Xcode.
 
- 2. Import the downloaded unitypackage into your Unity project through `Assets` > `Import Package` > `Custom Package...`.
+ 2. Download the [WebEngageNotificationContent.unitypackage](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngageNotificationContent.unitypackage).
 
- 3. Build your iOS app through Unity Editor and open Unity-iPhone.xcodeproj in your Xcode IDE.
+ 3. Import the downloaded unitypackage into your Unity project through `Assets` > `Import Package` > `Custom Package...`.
 
- 4. Verify that NotificationViewController extension is added and linked to your main app target.
+ 4. Build your iOS app through Unity Editor and open Unity-iPhone.xcodeproj in your Xcode IDE.
+
+ 5. Verify that NotificationViewController extension is added and linked to your main app target.
 
 
 #### Troubleshooting for Rich Push Notifications
