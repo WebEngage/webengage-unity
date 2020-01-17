@@ -10,6 +10,13 @@ WebEngage Unity plugin is for Android and iOS apps built with Unity. This unity-
  2. Import the downloaded unitypackage into your Unity project through `Assets` > `Import Package` > `Custom Package...`.
 
 
+## Update
+
+ 1. Replace the AAR file at `Assets/Plugins/Android/webengage-android-unity-X.X.X.aar` with the latest [webengage-android-unity.aar](https://github.com/WebEngage/webengage-unity-android/raw/master/Assets/Plugins/Android/webengage-android-unity-3.15.0.aar).
+
+ 2. Replace the framework file at `Assets/Plugins/iOS/WebEngage.framework` with the latest [WebEngage framework](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngage.framework.zip). Unzip the downloaded zip file to get the framework.
+
+
 ## Initialization
 
  1. For Android, add the following meta-data tags in `Assets/Plugins/Android/AndroidManifest.xml` file of your Unity project.
@@ -20,7 +27,8 @@ WebEngage Unity plugin is for Android and iOS apps built with Unity. This unity-
     ...>
 
     <application
-    	...>
+    	...
+        android:allowBackup="false">
 
 	    <meta-data android:name="com.webengage.sdk.android.key" android:value="YOUR-WEBENGAGE-LICENSE-CODE" />
 
