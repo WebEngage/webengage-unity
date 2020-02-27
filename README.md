@@ -9,10 +9,14 @@ WebEngage Unity plugin is for Android and iOS apps built with Unity. This unity-
 
  2. Import the downloaded unitypackage into your Unity project through `Assets` > `Import Package` > `Custom Package...`.
 
+ 3. Replace the AAR file at `Assets/Plugins/Android/webengage-android-unity-X.X.X.aar` with the latest [webengage-android-unity.aar](https://github.com/WebEngage/webengage-unity-android/raw/master/Assets/Plugins/Android/webengage-android-unity-3.16.0.aar).
+
+ 4. Replace the framework file at `Assets/Plugins/iOS/WebEngage.framework` with the latest [WebEngage framework](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngage.framework.zip). Unzip the downloaded zip file to get the framework.
+
 
 ## Update
 
- 1. Replace the AAR file at `Assets/Plugins/Android/webengage-android-unity-X.X.X.aar` with the latest [webengage-android-unity.aar](https://github.com/WebEngage/webengage-unity-android/raw/master/Assets/Plugins/Android/webengage-android-unity-3.15.0.aar).
+ 1. Replace the AAR file at `Assets/Plugins/Android/webengage-android-unity-X.X.X.aar` with the latest [webengage-android-unity.aar](https://github.com/WebEngage/webengage-unity-android/raw/master/Assets/Plugins/Android/webengage-android-unity-3.16.0.aar).
 
  2. Replace the framework file at `Assets/Plugins/iOS/WebEngage.framework` with the latest [WebEngage framework](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngage.framework.zip). Unzip the downloaded zip file to get the framework.
 
@@ -168,32 +172,17 @@ IMPL_APP_CONTROLLER_SUBCLASS(OverrideAppDelegate)
 
 ```
 
+
 ## Attribution Tracking
 
-Add the following receiver tag in the `Assets/Plugins/Android/AndroidManifest.xml` file for tracking app installs and user-acquisition attribute details.
+In order to track 'App Installed' events and install-referrer URLs in Android, follow the steps below.
 
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest
-    ...>
+1. Make sure that you are using webengage-android-unity.aar version 3.16.0 or above.
 
-    <application
-        ...>
+2. Download the latest version of [Android Install Referrer library (aar)](https://mvnrepository.com/artifact/com.android.installreferrer/installreferrer).
 
-        ...
+3. Add the aar file to your Unity project at the location `/Assets/Plugins/Android/installreferrer-X.X.X.aar`.
 
-        <receiver
-          android:name="com.webengage.sdk.android.InstallTracker"
-          android:exported="true">
-          <intent-filter>
-             <action android:name="com.android.vending.INSTALL_REFERRER" />
-          </intent-filter>
-        </receiver>
-
-        ...
-    </application>
-</manifest>
-```
 
 ## Tracking Users
 
