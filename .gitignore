@@ -1,15 +1,14 @@
-/.vs
-/Assets/Scenes/
-/Assets/Scripts/
-/Assets/Plugins/Android/AndroidManifest.xml
-/Logs
+Example/.vs
+Example/Assets/Scenes/
+Example/Assets/Scripts/
+Example/Logs
 /obj
 /ProjectSettings
 /ios-build
-Temp/
-Obj/
-UnityGenerated/
-Library/
+Example/Temp/
+Example/Obj/
+Example/UnityGenerated/
+Example/Library/
 *.pyc
 *.meta
 
@@ -48,3 +47,5 @@ build/
 Icon?
 ehthumbs.db
 Thumbs.db
+Example/iOS
+.vsconfig
