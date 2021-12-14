@@ -1,3 +1,4 @@
+
 # WebEngage Unity
 
 WebEngage Unity plugin is for Android and iOS apps built with Unity. This unity-package will not work on any other platform.
@@ -505,3 +506,154 @@ using WebEngageBridge;
     data.Add("price", 1200);
     WebEngage.ScreenNavigated("Purchase Screen", data);
 ```
+
+# Callbacks
+
+### Push Notification Callbacks
+
+Set up callbacks in your Unity project by following these steps:
+
+#### 1. Push Notification Received (Only For Android Platform) : 
+ - `SetPushReceivedCallBack` allows you to obtain a callback when you get
+   a push notification.
+   
+ - Create  `[MonoPInvokeCallback(typeof(callback))]` type method with any name in which you wish to receive callback
+
+ Eg.  
+```csharp
+[MonoPInvokeCallback(typeof(callback))]
+    public static void pushReceivedCallback(string json)
+    {
+        Debug.Log("/*/*/*/* Unity Callback received on PUSH NOTIFICATION RECEIVED”);
+    }
+```
+
+ - Add `SetPushReceivedCallBack` in your C#(.cs) code and send the previously constructed function as an argument
+    Eg.
+```csharp
+    WebEngage.setPushReceivedCallBack(pushReceivedCallback); 
+```
+
+*As a result, whenever you receive a push notification, the code defined in the callback handler will run.*
+
+
+
+#### 2. Push Notification Clicked :
+ - `setPushClickCallBack` allows you to obtain a callback when you click a push notification.
+   
+ - Create  `[MonoPInvokeCallback(typeof(callback))]` type method with any name in which you wish to receive callback
+
+ Eg.  
+```csharp
+[MonoPInvokeCallback(typeof(callback))]
+public static void handlepushNotificationClicked(string json)
+{
+	Debug.Log("/*/*/*/* Unity Callback received on PUSH NOTIFICATION CLICKED");
+}
+```
+
+ - Add `setPushClickCallBack` in your C#(.cs) code and send the previously constructed function as an argument
+    Eg.
+```csharp
+    WebEngage.setPushClickCallBack(handlepushNotificationClicked); 
+```
+
+*As a result, whenever you click a push notification, the code defined in the callback handler will run.*
+
+
+### InApp Notification Callbacks
+
+Set up callbacks in your Unity project by following these steps:
+
+#### 1. InApp Notification Prepared :
+ - `setInAppPreparedCallBack` allows you to obtain a callback when InApp Notification is prepared.
+   
+ - Create  `[MonoPInvokeCallback(typeof(callback))]` type method with any name in which you wish to receive callback
+
+ Eg.  
+```csharp
+[MonoPInvokeCallback(typeof(callback))]
+    public static void handleInAppNotificationPrepared(string json)
+    {
+        Debug.Log("/*/*/*/* Unity Callback received on InApp Notification prepared”);
+    }
+```
+
+ - Add `setInAppPreparedCallBack` in your C#(.cs) code and send the previously constructed function as an argument
+    Eg.
+```csharp
+    WebEngage.setInAppPreparedCallBack(handleInAppNotificationPrepared); 
+```
+
+*As a result, whenever you receive a push notification, the code defined in the callback handler will run.*
+
+
+
+#### 2. InApp Notification Shown :
+ - `setInAppShownCallBack` allows you to obtain a callback when InApp Notification is shown on the screen.
+   
+ - Create  `[MonoPInvokeCallback(typeof(callback))]` type method with any name in which you wish to receive callback
+
+ Eg.  
+```csharp
+[MonoPInvokeCallback(typeof(callback))]
+public static void handleInAppNotificationShown(string json)
+{
+	Debug.Log("/*/*/*/* Unity Callback received on InApp Notification Shown“);
+}
+```
+
+ - Add `setInAppShownCallBack` in your C#(.cs) code and send the previously constructed function as an argument    
+ 
+Eg.
+```csharp
+    WebEngage.setInAppShownCallBack(handleInAppNotificationShown); 
+```
+
+*As a result, whenever InApp Notification is shown on to the screen, the code defined in the callback handler will run.*
+
+#### 3. InApp Notification Clicked :
+ - `setInAppClickedCallBack` allows you to obtain a callback when InApp Notification is Clicked.
+   
+ - Create  `[MonoPInvokeCallback(typeof(callback))]` type method with any name in which you wish to receive callback
+
+ Eg.  
+```csharp
+[MonoPInvokeCallback(typeof(callback))]
+public static void handleInAppNotificationClicked(string json)
+{
+	Debug.Log("/*/*/*/* Unity Callback received on InApp Notification Clicked“);
+}
+```
+
+ - Add `setInAppClickedCallBack` in your C#(.cs) code and send the previously constructed function as an argument    
+ 
+Eg.
+```csharp
+    WebEngage.setInAppClickedCallBack(handleInAppNotificationClicked); 
+```
+
+*As a result, whenever InApp Notification is Clicked, the code defined in the callback handler will run.*
+
+#### 4.  InApp Notification Dismissed :
+ - `setInAppDismissedCallBack` allows you to obtain a callback when InApp Notification is Dismissed.
+   
+ - Create  `[MonoPInvokeCallback(typeof(callback))]` type method with any name in which you wish to receive callback
+
+ Eg.  
+```csharp
+[MonoPInvokeCallback(typeof(callback))]
+public static void handleInAppNotificationDismissed(string json)
+{
+	Debug.Log("/*/*/*/* Unity Callback received on InApp Notification Dismissed“);
+}
+```
+
+ - Add `setInAppDismissedCallBack` in your C#(.cs) code and send the previously constructed function as an argument    
+ 
+Eg.
+```csharp
+    WebEngage.setInAppDismissedCallBack(handleInAppNotificationDismissed); 
+```
+
+*As a result, whenever InApp Notification is Dismissed, the code defined in the callback handler will run.*
