@@ -488,7 +488,7 @@ namespace WebEngageBridge
             }
             #endif
         }
-        public static void setInAppCLickedCallBack(callback obj)
+        public static void setInAppClickedCallBack(callback obj)
         {
             #if UNITY_IOS
             if (Application.platform == RuntimePlatform.IPhonePlayer)

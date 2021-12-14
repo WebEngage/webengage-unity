@@ -17,7 +17,7 @@ public class MainCamera : MonoBehaviour
         WebEngage.setPushClickCallBack(handlepushNotificationClicked);
         WebEngage.setInAppPreparedCallBack(handleInAppNotificationPrepared);
         WebEngage.setInAppShownCallBack(handleInAppNotificationShown);
-        WebEngage.setInAppCLickedCallBack(handleInAppNotificationClicked);
+        WebEngage.setInAppClickedCallBack(handleInAppNotificationClicked);
         WebEngage.setInAppDismissedCallBack(handleInAppNotificationDismssed);
 
 
