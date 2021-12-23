@@ -180,6 +180,4 @@ typedef NS_ENUM(NSInteger, WEGLocationAccuracy){
 - (void)setInAppDelegate:(id <WEGInAppNotificationProtocol>)object;
 
 
-
-
 @end
