@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using AOT;
 using UnityEngine;
@@ -11,8 +11,8 @@ public class MainCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("UNity running from the main camera script");
-        WebEngage.Login("BHAVESH SARWAR");
+        Debug.Log("Unity running from the main camera script");
+//        WebEngage.Login("BHAVESH SARWAR");
         //WebEngage.setisSDKInitialsedCallBack(handleIsSDKInitialised);
         WebEngage.setPushClickCallBack(handlepushNotificationClicked);
         WebEngage.setInAppPreparedCallBack(handleInAppNotificationPrepared);
