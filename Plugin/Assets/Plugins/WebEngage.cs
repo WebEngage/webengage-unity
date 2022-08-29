@@ -859,6 +859,13 @@ namespace WebEngageBridge
             #endif
         }
         
+        public static void SetDevicePushOptIn(bool val)
+        {
+            #if (UNITY_ANDROID && !UNITY_EDITOR)
+            GetUser().Call("setDevicePushOptIn", val);
+            #endif
+        }
+        
         public static void DeleteUserAttribute(string key)
         {
             #if UNITY_ANDROID
