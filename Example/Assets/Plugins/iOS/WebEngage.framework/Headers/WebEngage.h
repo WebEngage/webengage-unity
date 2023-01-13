@@ -13,7 +13,11 @@
 #import "WEGManualIntegration.h"
 #import "WEGInAppNotificationProtocol.h"
 #import "WEGDeeplinkManager.h"
+#import "WEInLineNotificationProtocol.h"
+#import "WEGInlineRendrerHelper.h"
+
 #import "WebEngageUnity.h"
+
 
 
 FOUNDATION_EXPORT double WebEngageVersionNumber;
@@ -69,6 +73,13 @@ typedef NS_ENUM(NSInteger, WEGLocationAccuracy){
  * @warning SDK keeps only a week reference to notificationDelegate, its application's responsibility to maintain the ownership of this class and keep it in memory.
 */
 @property (nonatomic, weak, readwrite) id<WEGAppDelegate> pushNotificationDelegate;
+
+/**
+ *  Set this property to set custom timeout for a session. If the time spent by the app in background session is less it's value, the SDK will not a new visitor session
+ *
+ * @warning Application must initialize the SDK first by calling application:didFinishLaunchingWithOptions: or one of its overloads before accessing this property.
+*/
+@property (nonatomic, readwrite) long sessionTimeOut;
 
 /**
 *  Get an instance of WEGDeeplinkManager which provides APIs for handling and tracking universal links
@@ -176,6 +187,10 @@ typedef NS_ENUM(NSInteger, WEGLocationAccuracy){
     If WEGLocationAccuracyDisable is passed, WebEngage will stop tracking user's location, however you can manage location updates by using setUserLocationWithLatitude:andLongitude on user profile.
  */
 - (void)autoTrackUserLocationWithAccuracy:(WEGLocationAccuracy)accuracy;
+
+
+
+-(void)setInLineDelegates:(id <InLineNotificationsProtocol>)object;
 
 - (void)setInAppDelegate:(id <WEGInAppNotificationProtocol>)object;
 

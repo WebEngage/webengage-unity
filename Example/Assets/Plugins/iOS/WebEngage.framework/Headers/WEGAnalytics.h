@@ -27,6 +27,8 @@
  */
 - (void)trackEventWithName:(NSString *)eventName andValue:(NSDictionary *)eventValue;
 
+- (void)trackSystemEventWithName:(NSString *)eventName andValue:(NSDictionary *)eventValue;
+
 
 /**
  *  Track an event in WebEngage, an event represents an action taken by user like clicking a button, adding items to cart, searching etc. Its upto the application to decide the names and data for these events.

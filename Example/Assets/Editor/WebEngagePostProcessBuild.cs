@@ -10,7 +10,7 @@ public class WebEngagePostProcessBuild
     {
         if (buildTarget == BuildTarget.iOS)
         {
-            string WEBENGAGE_LICENSE_CODE = "d3a4a436";
+            string WEBENGAGE_LICENSE_CODE = "~47b66161";
             string logLevel = "VERBOSE";
             bool apnsAutoRegister = true;
             bool trackLocation = false;

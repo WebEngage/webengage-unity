@@ -6,6 +6,6 @@ framework module WebEngage {
 }
 
 module WebEngage.Swift {
-    header "WebEngage-Swift.h"
-    requires objc
+  header "WebEngage-Swift.h"
+  requires objc
 }

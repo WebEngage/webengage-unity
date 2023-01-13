@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 /**
  *  This enum represents the different reasons for which new anonymous is generated, which are known to WebEngage and are treated in its own symantically meaningful way.
  */
@@ -14,6 +15,11 @@ typedef NS_ENUM(NSInteger, WEGReason){
     WEGNewAnonymousIDGenerated = 1,
     WEGAppLaunched = 2,
     WEGUserLoggedOut = 3
+};
+
+typedef NS_ENUM(NSInteger, WEGSessionType){
+    WEGSessionTypeForeground = 1,
+    WEGSessionTypeBackground = 2
 };
 
 
@@ -43,4 +49,11 @@ typedef NS_ENUM(NSInteger, WEGReason){
  */
 - (void)didReceiveAnonymousID:(NSString *)anonymousID forReason:(WEGReason)reason;
 
+/**
+ *  This is a callback that gets called every time session is started
+ *
+ *  @param sessionType Contains type of session
+ *  @param forNewUser This denotes if session is created for new user
+ */
+- (void)sessionStarted:(WEGSessionType)sessionType forNewUser:(BOOL)newUser;
 @end

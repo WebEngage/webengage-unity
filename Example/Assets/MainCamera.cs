@@ -12,7 +12,7 @@ public class MainCamera : MonoBehaviour
     void Start()
     {
         Debug.Log("Unity running from the main camera script");
-//        WebEngage.Login("BHAVESH SARWAR");
+        WebEngage.Login("BHAVESH_SARWAR_1");
         //WebEngage.setisSDKInitialsedCallBack(handleIsSDKInitialised);
         WebEngage.setPushClickCallBack(handlepushNotificationClicked);
         WebEngage.setInAppPreparedCallBack(handleInAppNotificationPrepared);
