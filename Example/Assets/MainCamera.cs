@@ -80,7 +80,9 @@ namespace Nrjwolf.Tools
         {
             
             Debug.Log("/*/*/*/* UNity Callback received on PUSH NOTIFICATION CLICKED");
+#if (UNITY_IOS)
             IOSNativeAlert.ShowAlertMessage("Push Callback received","Ok");
+#endif
         }
 
     }
