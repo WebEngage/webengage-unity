@@ -16,7 +16,6 @@ IMPL_APP_CONTROLLER_SUBCLASS(OverrideAppDelegate)
               didFinishLaunchingWithOptions:options
                        notificationDelegate:nil
                                autoRegister:YES];
-    [[WebEngage sharedInstance] setPushNotificationDelegate:self];
     return [super application:application didFinishLaunchingWithOptions:options];
 }
 

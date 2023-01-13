@@ -5,76 +5,84 @@ using UnityEngine;
 using WebEngageBridge;
 using static WebEngageBridge.WebEngage;
 
-public class MainCamera : MonoBehaviour
+namespace Nrjwolf.Tools
 {
 
-    // Start is called before the first frame update
-    void Start()
+    public class MainCamera : MonoBehaviour
     {
-        Debug.Log("Unity running from the main camera script");
-        WebEngage.Login("BHAVESH_SARWAR_1");
-        //WebEngage.setisSDKInitialsedCallBack(handleIsSDKInitialised);
-        WebEngage.setPushClickCallBack(handlepushNotificationClicked);
-        WebEngage.setInAppPreparedCallBack(handleInAppNotificationPrepared);
-        WebEngage.setInAppShownCallBack(handleInAppNotificationShown);
-        WebEngage.setInAppClickedCallBack(handleInAppNotificationClicked);
-        WebEngage.setInAppDismissedCallBack(handleInAppNotificationDismssed);
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            Debug.Log("Unity running from the main camera script");
+            WebEngage.Login("BHAVESH_SARWAR_1");
+            //WebEngage.setisSDKInitialsedCallBack(handleIsSDKInitialised);
+            WebEngage.setPushClickCallBack(handlepushNotificationClicked);
+            WebEngage.setInAppPreparedCallBack(handleInAppNotificationPrepared);
+            WebEngage.setInAppShownCallBack(handleInAppNotificationShown);
+            WebEngage.setInAppClickedCallBack(handleInAppNotificationClicked);
+            WebEngage.setInAppDismissedCallBack(handleInAppNotificationDismssed);
 
 
-        //WebEngage.setInAppPreparedCallBack(InAppNotificationPrepared);
-        //WebEngage.setInAppShownCallBack(InAppNotificationShown);
-    }
+            //WebEngage.setInAppPreparedCallBack(InAppNotificationPrepared);
+            //WebEngage.setInAppShownCallBack(InAppNotificationShown);
+            //IOSNativeAlert.ShowToast("Reseting...");
+        }
 
-    private void Awake()
-    {
+        private void Awake()
+        {
 #if (UNITY_ANDROID)
         WebEngage.Engage();
 #endif
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
 
-    }
+        }
 
-    //[MonoPInvokeCallback(typeof(callback))]
-    //public static void handleIsSDKInitialised(string json)
-    //{
-    //    Debug.Log("/*/*/*/* UNity Callback received on SDK Initialis");
-    //}
+        //[MonoPInvokeCallback(typeof(callback))]
+        //public static void handleIsSDKInitialised(string json)
+        //{
+        //    Debug.Log("/*/*/*/* UNity Callback received on SDK Initialis");
+        //}
 
-    // In app Callbacks
-    [MonoPInvokeCallback(typeof(callback))]
-    public static void handleInAppNotificationPrepared(string json)
-    {
-        Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationPrepared");
-        Debug.Log("/*/*/*/* isSDKInitialised" + WebEngage.getIsSDKInitialised());
-    }
+        // In app Callbacks
+        [MonoPInvokeCallback(typeof(callback))]
+        public static void handleInAppNotificationPrepared(string json)
+        {
+            Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationPrepared");
+            Debug.Log("/*/*/*/* isSDKInitialised" + WebEngage.getIsSDKInitialised());
+        }
 
-    [MonoPInvokeCallback(typeof(callback))]
-    public static void handleInAppNotificationShown(string json)
-    {
-        Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationShown");
-    }
+        [MonoPInvokeCallback(typeof(callback))]
+        public static void handleInAppNotificationShown(string json)
+        {
+            Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationShown");
+        }
 
-    [MonoPInvokeCallback(typeof(callback))]
-    public static void handleInAppNotificationClicked(string json)
-    {
-        Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationClicked");
-    }
+        [MonoPInvokeCallback(typeof(callback))]
+        public static void handleInAppNotificationClicked(string json)
+        {
+            Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationClicked");
+        }
 
-    [MonoPInvokeCallback(typeof(callback))]
-    public static void handleInAppNotificationDismssed(string json)
-    {
-        Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationDismssed");
-    }
+        [MonoPInvokeCallback(typeof(callback))]
+        public static void handleInAppNotificationDismssed(string json)
+        {
+            Debug.Log("/*/*/*/* UNity Callback received on InAppNotificationDismssed");
+        }
 
-    // Push Notification Callbacks
-    [MonoPInvokeCallback(typeof(callback))]
-    public static void handlepushNotificationClicked(string json)
-    {
-        Debug.Log("/*/*/*/* UNity Callback received on PUSH NOTIFICATION CLICKED");
+        // Push Notification Callbacks
+        [MonoPInvokeCallback(typeof(callback))]
+        public static void handlepushNotificationClicked(string json)
+        {
+            
+            Debug.Log("/*/*/*/* UNity Callback received on PUSH NOTIFICATION CLICKED");
+            IOSNativeAlert.ShowAlertMessage("Push Callback received","Ok");
+        }
+
     }
 
 }
