@@ -15,11 +15,29 @@ WebEngage Unity plugin is for Android and iOS apps built with Unity. This unity-
  4. Replace the framework file at `Assets/Plugins/iOS/WebEngage.framework` with the latest [WebEngage framework](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngage.framework.zip). Unzip the downloaded zip file to get the framework.
 
 
-## Update
+## Update Android
 
  1. Replace the AAR file at `Assets/Plugins/Android/webengage-android-unity-X.X.X.aar` with the latest [webengage-android-unity.aar](https://github.com/WebEngage/webengage-unity-android/raw/master/Assets/Plugins/Android/webengage-android-unity-3.16.0.aar).
 
- 2. Replace the framework file at `Assets/Plugins/iOS/WebEngage.framework` with the latest [WebEngage framework](https://github.com/WebEngage/webengage-unity-ios/raw/master/WebEngage.framework.zip). Unzip the downloaded zip file to get the framework.
+## Update iOS
+
+
+1. Download latest [XCFramework](https://webengage-sdk.s3.us-west-2.amazonaws.com/unity/ios/latest/WebEngage.xcframework.zip) for WebEngage
+
+2. Unzip zip file to get XCFramework file
+
+3. Copy Unzipped `XCFramework` inside your project folder
+
+4. Open Unity iOS Project in XCode
+
+5. In Xcode, go to your `Targets`, under `UnityFramework` Target, select `Build Phases`
+
+6. Add XCFramework under `Link Binary With Libraries`, You can drag and drop `XCFramework` or add thourgh + option under it
+
+![image](https://webengage-sdk.s3.us-west-2.amazonaws.com/unity/ios/images/IntegrationNativeStep.png)
+
+
+
 
 
 ## Initialization
