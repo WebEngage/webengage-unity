@@ -320,6 +320,12 @@ namespace WebEngageBridge
         private static extern void login(string s);
         
         [DllImport("__Internal")]
+        private static extern void loginWithJWT(string cuid, string jwt);
+        
+        [DllImport("__Internal")]
+        private static extern void setSecureToken(string cuid, string jwt);
+        
+        [DllImport("__Internal")]
         private static extern void logout();
         
         [DllImport("__Internal")]
@@ -400,6 +406,18 @@ namespace WebEngageBridge
         [DllImport("__Internal")]
         private static extern void setScreenData(string data);
         
+        [DllImport("__Internal")]
+        private static extern void autoTrackUserLocationWithAccuracy(int accuracy);
+        
+        [DllImport("__Internal")]
+        private static extern void setProxyURL(string proxyURL);
+        
+        [DllImport("__Internal")]
+        private static extern void resetProxyURL();
+        
+        [DllImport("__Internal")]
+        private static extern string getDeeplinkFor(string inAppNotificationData, string actionId);
+        
         
         // Push Notification Callbacks
         public delegate void callback(string pushData);
@@ -416,6 +434,8 @@ namespace WebEngageBridge
         public static extern void InAppCLickedCallBack(callback callback);
         [DllImport("__Internal")]
         public static extern void InAppDismissedCallBack(callback callback);
+        [DllImport("__Internal")]
+        public static extern void jwtTokenInvalidatedCallBack(callback callback);
         [DllImport("__Internal")]
         private static extern bool isSDKInitialised();
         
@@ -515,6 +535,16 @@ namespace WebEngageBridge
             if (Application.platform == RuntimePlatform.Android){
                 var inApp = WEInAppNotificationCallback.Instance;
                 inApp.setInAppDismissed(obj);
+            }
+            #endif
+        }
+        
+        public static void setJWTTokenInvalidatedCallBack(callback obj)
+        {
+            #if UNITY_IOS
+            if (Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                jwtTokenInvalidatedCallBack(obj);
             }
             #endif
         }
@@ -648,6 +678,26 @@ namespace WebEngageBridge
             GetUser().Call("login", cuid);
             #elif UNITY_IOS
             login(cuid);
+            #endif
+        }
+        
+        public static void LoginWithJWT(string cuid, string jwt)
+        {
+
+            //TODO:- need to implement this for Android too, as of now this is a work Around
+            #if UNITY_ANDROID
+            GetUser().Call("login", cuid);
+            #elif UNITY_IOS
+            loginWithJWT(cuid, jwt);
+            #endif
+        }
+        
+        public static void SetSecureToken(string cuid, string jwt)
+        {
+            #if UNITY_ANDROID
+            GetUser().Call("setSecureToken", cuid);
+            #elif UNITY_IOS
+            setSecureToken(cuid, jwt);
             #endif
         }
         
@@ -792,6 +842,15 @@ namespace WebEngageBridge
             {
                 GetUser().Call("setOptIn", GetEnum(channelClassPath, "SMS"), optIn);
             }
+            ////TODO:- Enable below when implementation done on Android 
+            // else if ("whatsapp".Equals(channel, System.StringComparison.OrdinalIgnoreCase))
+            // {
+            //     GetUser().Call("setOptIn", GetEnum(channelClassPath, "WHATSAPP"), optIn);
+            // }
+            // else if ("viber".Equals(channel, System.StringComparison.OrdinalIgnoreCase))
+            // {
+            //     GetUser().Call("setOptIn", GetEnum(channelClassPath, "VIBER"), optIn);
+            // }
             else
             {
                 Debug.LogError("WebEngageBridge: Invalid channel name: " + channel + ". Must be one of [push, in_app, email, sms]");
@@ -953,6 +1012,36 @@ namespace WebEngageBridge
             {
                 Debug.LogError("Exception while updating FCM token: " + e);
             }
+            #endif
+        }
+        
+        public static void AutoTrackUserLocationWithAccuracy(int accuracy)
+        {
+            #if UNITY_IOS
+            autoTrackUserLocationWithAccuracy(accuracy);
+            #endif
+        }
+        
+        public static void SetProxyURL(string proxyURL)
+        {
+            #if UNITY_IOS
+            setProxyURL(proxyURL);
+            #endif
+        }
+        
+        public static void ResetProxyURL()
+        {
+            #if UNITY_IOS
+            resetProxyURL();
+            #endif
+        }
+        
+        public static string GetDeeplinkFor(string inAppNotificationData, string actionId)
+        {
+            #if UNITY_IOS
+            return getDeeplinkFor(inAppNotificationData, actionId);
+            #else
+            return null;
             #endif
         }
     }

@@ -15,7 +15,7 @@ IMPL_APP_CONTROLLER_SUBCLASS(OverrideAppDelegate)
     [[WebEngage sharedInstance] application:application
               didFinishLaunchingWithOptions:options
                        notificationDelegate:nil
-                               autoRegister:YES];
+                               autoRegister:YES setLicenseCode:@"~47b66161" withEventReportingStrategy:HighPriority];
     return [super application:application didFinishLaunchingWithOptions:options];
 }
 
