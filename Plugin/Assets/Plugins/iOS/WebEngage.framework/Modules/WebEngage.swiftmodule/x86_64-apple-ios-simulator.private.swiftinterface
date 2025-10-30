@@ -1,0 +1,121 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name WebEngage
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+import Foundation
+import Swift
+import UIKit
+@_exported import WebEngage
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+import os.log
+import os
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class WEGNetworkManager : ObjectiveC.NSObject {
+  @objc public static let shared: WebEngage.WEGNetworkManager
+  @objc public var proxyURL: Swift.String?
+  @objc public var weNetworkInterceptor: (any WebEngage.WENetworkInterceptor)?
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func performUploadDataTask(to urlRequest: Foundation.URLRequest, cuid: Foundation.NSString?, body: Foundation.Data, then handler: @escaping @Sendable (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void, task taskHandler: ((Foundation.URLSessionDataTask) -> Swift.Void)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func performDataTask(to urlRequest: Foundation.URLRequest, then handler: @escaping @Sendable (Foundation.Data?, Foundation.URLResponse?, (any Swift.Error)?) -> Swift.Void, task taskHandler: ((Foundation.URLSessionDataTask) -> Swift.Void)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func getModifiedUrl(request: Foundation.URLRequest, cuid: Swift.String?) -> Foundation.URLRequest
+  #endif
+  public func setProxyURL(urlrequest: inout Foundation.URLRequest)
+  @objc public func setProxyURL(url: Swift.String)
+  @objc public func resetProxyDomain()
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func getCuid() -> Swift.String?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func getLuid() -> Swift.String?
+  #endif
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class WEGUtils : ObjectiveC.NSObject {
+  @objc public class func deleteWebEngageDirectory()
+  @objc public class func createDirectory(at path: Swift.String)
+  @objc public class func createFile(at path: Swift.String, from oldPath: Swift.String)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @objcMembers public class WEGInAppUtils : ObjectiveC.NSObject {
+  @objc public class func shouldPresentInapp(for data: [Swift.AnyHashable : Any]) -> Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class WEGJWTManager : ObjectiveC.NSObject {
+  @objc public static let shared: WebEngage.WEGJWTManager
+  @objc public var tokenInvalidatedCallback: () -> Swift.Void
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public var JWTToken: Swift.String? {
+    @objc get
+    @objc set(newToken)
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func storeJWTTokenInLocal(token: Swift.String?, cuid: Swift.String)
+  #endif
+  @objc public func removeJWTToken(cuid: Swift.String)
+  @objc deinit
+}
+@objc public protocol WENetworkInterceptor {
+  @objc optional func onRequest(_ request: Foundation.URLRequest, completionHandler: @escaping (Foundation.URLRequest) -> Swift.Void)
+  @objc optional func onResponse(_ response: WebEngage.WENetworkResponse, completionHandler: @escaping (WebEngage.WENetworkResponse) -> Swift.Void)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class WENetworkResponse : ObjectiveC.NSObject {
+  @objc public var data: Foundation.Data?
+  @objc public var response: Foundation.URLResponse?
+  @objc public var error: (any Swift.Error)?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class WEGCLCHandler : ObjectiveC.NSObject {
+  @objc public enum CampaignTypes : Swift.Int {
+    case inApp
+    case inLine
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.Int)
+    #endif
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public enum CLCHandlerKeys : Swift.String {
+    case viewDetailsForSession
+    case totalInAppCountInSession
+    case totalInLineCountInSession
+    case lastInAppViewDate
+    case lastInLineViewDate
+    case recurrDetails
+    case lastRecurResetTime
+    case frequency
+    case recurCount
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.String)
+    #endif
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  @objc public static let shared: WebEngage.WEGCLCHandler
+  @objc public var fcDetails: Foundation.NSMutableDictionary
+  @objc public func isPassedFrequencyCapping(forKey: Swift.String, forNotification: Foundation.NSDictionary) -> Swift.Bool
+  @objc public func isRecurLimitPassed(forKey: Swift.String, forNotification: Foundation.NSDictionary) -> Swift.Bool
+  @objc public func resetRecurringforCampaign()
+  @objc public func incrementTotalViewCountForSession(forCampaignType: WebEngage.WEGCLCHandler.CampaignTypes)
+  @objc public func incrementRecurCount(forKey: Swift.String, forNotification: Foundation.NSDictionary)
+  @objc public func resetTotalViewCountForSession(forCampaignType: WebEngage.WEGCLCHandler.CampaignTypes)
+  @objc public func removeViewDetailsInSession()
+  @objc deinit
+}
+extension WebEngage.WEGCLCHandler.CampaignTypes : Swift.Equatable {}
+extension WebEngage.WEGCLCHandler.CampaignTypes : Swift.Hashable {}
+extension WebEngage.WEGCLCHandler.CampaignTypes : Swift.RawRepresentable {}
+extension WebEngage.WEGCLCHandler.CLCHandlerKeys : Swift.Equatable {}
+extension WebEngage.WEGCLCHandler.CLCHandlerKeys : Swift.Hashable {}
+extension WebEngage.WEGCLCHandler.CLCHandlerKeys : Swift.RawRepresentable {}
