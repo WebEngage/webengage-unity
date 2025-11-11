@@ -140,6 +140,44 @@ namespace WebEngageBridge
     }
     #endif
     
+    #if (UNITY_ANDROID)
+    public sealed class WESecurityCallback: AndroidJavaProxy {
+        private callback jwtTokenInvalidatedCallbackObj = null;
+        public static WESecurityCallback instance = null;
+        private static readonly object padlock3 = new object();
+        
+        public static WESecurityCallback Instance
+        {
+            get
+            {
+                lock (padlock3)
+                {
+                    if (instance == null)
+                    {
+                        instance = new WESecurityCallback();
+                    }
+                    return instance;
+                }
+            }
+        }
+        
+        public void setJWTTokenInvalidatedCallBackObj(callback obj) {
+            jwtTokenInvalidatedCallbackObj = obj;
+        }
+        
+        private WESecurityCallback() : base("com.webengage.sdk.android.unity.WEUnitySecurityCallbacks") {
+            new AndroidJavaObject("com.webengage.sdk.android.unity.WEUnityCallbacksSecurityImpl", this);
+        }
+        
+        public void onSecurityException(string jsonString) {
+            Debug.Log("WESecurityCallback onSecurityException: " + jsonString);
+            if (jwtTokenInvalidatedCallbackObj != null) {
+                jwtTokenInvalidatedCallbackObj(jsonString);
+            }
+        }
+    }
+    #endif
+    
     
     
     
@@ -547,6 +585,12 @@ namespace WebEngageBridge
                 jwtTokenInvalidatedCallBack(obj);
             }
             #endif
+            #if (UNITY_ANDROID)
+            if (Application.platform == RuntimePlatform.Android){
+                var security = WESecurityCallback.Instance;
+                security.setJWTTokenInvalidatedCallBackObj(obj);
+            }
+            #endif
         }
         
         public static bool getIsSDKInitialised() {
@@ -686,7 +730,7 @@ namespace WebEngageBridge
 
             //TODO:- need to implement this for Android too, as of now this is a work Around
             #if UNITY_ANDROID
-            GetUser().Call("login", cuid);
+             GetWebEngage().Call("setSecurityToken", cuid, jwt);
             #elif UNITY_IOS
             loginWithJWT(cuid, jwt);
             #endif
@@ -695,7 +739,7 @@ namespace WebEngageBridge
         public static void SetSecureToken(string cuid, string jwt)
         {
             #if UNITY_ANDROID
-            GetUser().Call("setSecureToken", cuid);
+           GetWebEngage().Call("setSecurityToken", cuid, jwt);
             #elif UNITY_IOS
             setSecureToken(cuid, jwt);
             #endif
@@ -842,15 +886,14 @@ namespace WebEngageBridge
             {
                 GetUser().Call("setOptIn", GetEnum(channelClassPath, "SMS"), optIn);
             }
-            ////TODO:- Enable below when implementation done on Android 
-            // else if ("whatsapp".Equals(channel, System.StringComparison.OrdinalIgnoreCase))
-            // {
-            //     GetUser().Call("setOptIn", GetEnum(channelClassPath, "WHATSAPP"), optIn);
-            // }
-            // else if ("viber".Equals(channel, System.StringComparison.OrdinalIgnoreCase))
-            // {
-            //     GetUser().Call("setOptIn", GetEnum(channelClassPath, "VIBER"), optIn);
-            // }
+            else if ("whatsapp".Equals(channel, System.StringComparison.OrdinalIgnoreCase))
+            {
+                GetUser().Call("setOptIn", GetEnum(channelClassPath, "WHATSAPP"), optIn);
+            }
+            else if ("viber".Equals(channel, System.StringComparison.OrdinalIgnoreCase))
+            {
+                GetUser().Call("setOptIn", GetEnum(channelClassPath, "VIBER"), optIn);
+            }
             else
             {
                 Debug.LogError("WebEngageBridge: Invalid channel name: " + channel + ". Must be one of [push, in_app, email, sms]");
@@ -1042,6 +1085,14 @@ namespace WebEngageBridge
             return getDeeplinkFor(inAppNotificationData, actionId);
             #else
             return null;
+            #endif
+        }
+        
+        public static void StartGAIDTracking()
+        {
+              Debug.Log("Started GAID Tracking");
+            #if UNITY_ANDROID
+           GetWebEngage().Call("startGAIDTracking");
             #endif
         }
     }

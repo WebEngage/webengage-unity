@@ -5,20 +5,28 @@ using static WebEngageBridge.WebEngage;
 
 public class MainCamera2 : MonoBehaviour
 {
+
+
+  private void Awake()
+    {
+        WebEngage.Engage();
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("WebEngage Testing");
+    Debug.Log("WebEngage Testing");
         // WebEngage.Login("Shubham");
-        WebEngage.LoginWithJWT("sn_jwt", "yJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJzbl9qd3QiLCJpYXQiOjE3NjE3MzkxMjMsImV4cCI6MTc3MjEwNzEyM30.wmy4wlhWAOgJYwsiVtMA6BMwDjkjYe4djceWW-gK4zjmmHeToJOqurIlrneVwzyje_mFCkzd3tI5dfg9e6p1jutXxanCUhUGujjEOtxRR2sYZiInCxoN9kjhymkw2DcyXtnWo-f1Kkm_oXHwKHUyJDxYRT0kT-JCNK-eS8QmozYkg5t4wCSUntLnfZRbO6tdlEQ3689GPc9L4Cf7XvNU8RSxL-xm8StyNePDzy0HhPu4OdF8iBvJwFvsOSchuhAcqPN2d5_BtJZ4kW-m6FQdA0irPHOWIkm4DV9HMIc22UDjbXHpUc4JKC6g-YBQUUiE3-WkrW1qAMr5bHudkIYKtiKSLddezWRlwI4odyA399dVoeaOmszvAEd6FvCtJMhEaNmpDENOHYZ3gggl3_d8onMMcwTaCJTM21kPbAqtkZFsUu340zijQEYpaV_nB--Kj4lfEf_XW5zSV8gssdcVDPCiwk6M9yHzJXPzFvsXhMc8vOHlmipkPS8SY2RnBo3Bz_E5idvkeHRFl57dOrZ6i18ufL2SAVxsQ93O2aQ3Cv6Tti45Wbrh_Pkf1u-MXXBeROKwxhzdL1ldxWsia3q8f-DVOBT2ayEvTGK7CgAnCuuN9ZVuu7xfmKdZYpNs6ZFfyf4eMnjQaPxqjSzfgfhqbhzSjCBkbQxr81fyWoxfb4Q");
+        WebEngage.LoginWithJWT("authcache_pp_emu", "yJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdWlkIjoiYXV0aGNhY2hlX3BwX2VtdSJ9.d-81rWb5wB1vWEElO1gc4VH6O7duTEm1Yd_CyuHPEXWhPV3-MBRYiz7YQl7IaD4HgpdxIQunmmVhPyrCJi0wS-21Sc0bOF6vIpcza_apjCgWCEBkNLt31Dzgvm7HzbvHpea9UIuMEJv0Gy_YIVKaEIhJ-rQ-CZZiExjsOHyL-QqIbkpzO2pPEkLsDnyyOEklhDP_4e_00VmXFDh0fxRj_VhwVSjPo4oTSD5JiSE9Kz-t9isS8KdHqaVRDaRqr0B5LunHHTX1KJ35-ocnbKLUmVIexAks0goFDBjX0rUZ8HgwErEtTK3PsRGhnkI3p7QO6TxG8XxBC-2vt59ceFJ0LrVbtHW88v8_AIk9HEPbxNG6Xjob-m0K7paZLevQKRluMwSLYDhZwbrsE5BlMqkebxbgw0aGhx5_T6qt104tcP4B1lgCXgaLB6sKwLSV03Yoj33CqBgN0fNSr_RkYha3MlmK2eZIV2uRfv6uVaL0_8jLPV0EKMfbbQJoI4VDhZj9ePZBfFEOoA6tFD9tgz2_2mzBhRMDcak67KzjMULbAFrPN5Dj37VG9gDMXoIfYqQRsM92fD6SwHMpk9OfgNF3sVrZz0HJicBKwM6suDFQSlkoEIlIc4gbOIcs4mmWjRfbTWAk1oHmAWRNmzX5sejHfoVcr1YhgrpJawnDSYylBik");
         WebEngage.TrackEvent("Test New Event");
         WebEngage.ScreenNavigated("Test Screen Shubham");
         WebEngage.setJWTTokenInvalidatedCallBack(handleJwtTokenInvalidatedCallback);
         WebEngage.TrackEvent("Screen Name tracked....");
         WebEngage.SetOptIn("whatsapp", true);
-        WebEngage.SetOptIn("viber", false);
-
-        WebEngage.TrackEvent("Channel Opt In done....");
+        WebEngage.SetOptIn("viber", true);
+        WebEngage.SetOptIn("sms", true);
+        WebEngage.SetOptIn("push", true);
+    WebEngage.TrackEvent("Channel Opt In done....");
+    WebEngage.StartGAIDTracking();
  // Example JSON object
      string jsonString = @"{
   ""isActive"": 1,
@@ -50,7 +58,7 @@ public class MainCamera2 : MonoBehaviour
 }";
         WebEngage.AutoTrackUserLocationWithAccuracy(3);
         // Pass JSON string to GetDeeplinkFor
-      Debug.Log( WebEngage.GetDeeplinkFor(jsonString, "3178372a"));
+      // Debug.Log( WebEngage.GetDeeplinkFor(jsonString, "3178372a"));
         // WebEngage.SetProxyURL("http://shubhamnaidu.com");
     }
 
